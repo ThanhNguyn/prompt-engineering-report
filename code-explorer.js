@@ -3,7 +3,8 @@
   const ACCENT_COLOR = '#7c6aef';
   const PROJECT_TITLE = 'Week 03 - Viết Prompt hiệu quả';
   const FILES = [
-    { name: 'index.html', path: 'index.html', type: 'file' }
+    { name: 'index.html', path: 'index.html', type: 'file' },
+    { name: 'README.md', path: 'README.md', type: 'file' }
   ];
 
   // Load PrismJS Assets dynamically
