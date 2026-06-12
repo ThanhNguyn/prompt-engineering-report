@@ -4,6 +4,7 @@
   const PROJECT_TITLE = 'Week 03 - Viết Prompt hiệu quả';
   const FILES = [
     { name: 'index.html', path: 'index.html', type: 'file' },
+    { name: 'code-explorer.js', path: 'code-explorer.js', type: 'file' },
     { name: 'README.md', path: 'README.md', type: 'file' }
   ];
 
@@ -267,7 +268,8 @@
       /* Editor container */
       .ce-editor-container {
         flex: 1;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
         display: flex;
         padding: 15px;
         position: relative;
@@ -287,8 +289,10 @@
         margin: 0;
         padding: 0;
         flex: 1;
+        min-width: 0;
         background: transparent !important;
-        overflow: visible;
+        overflow-x: auto;
+        white-space: pre !important;
       }
       .ce-editor-container code {
         font-family: 'JetBrains Mono', monospace !important;
@@ -296,6 +300,7 @@
         line-height: 1.5 !important;
         background: transparent !important;
         padding: 0 !important;
+        white-space: pre !important;
       }
       
       /* Image Rendering */
@@ -464,6 +469,7 @@
           const ext = node.name.split('.').pop();
           fileBtn.className = `ce-tree-file ${ext}`;
           fileBtn.style.paddingLeft = `${depth * 12 + 15}px`;
+          fileBtn.setAttribute('data-path', node.path);
           
           // Custom SVG file icon
           let svgIcon = `
@@ -488,9 +494,7 @@
       
       // Update tree selection styles
       modal.querySelectorAll('.ce-tree-file').forEach(btn => {
-        const spanText = btn.querySelector('span').innerText;
-        const fileObj = FILES.find(f => f.path === path);
-        if (fileObj && fileObj.name === spanText) {
+        if (btn.getAttribute('data-path') === path) {
           btn.classList.add('active');
         } else {
           btn.classList.remove('active');
